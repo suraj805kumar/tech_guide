@@ -1,0 +1,25 @@
+Git Fork: let others to contribute in your repository
+
+Git is created by Linus Torvald
+Git is a Distributed Version Control System.
+Git is famous for project collaboration
+More than 1 person can work on project at the same time
+You can also contribute to public projects
+
+If you fork project, that project comes into your repository
+Then you can make change and request to project owner to merge changes.
+
+1. <> Code
+2. other person open his repository
+3. search for username/project | get the link from ceator (? how to share link to someone else)
+4. create a file 
+5. Create pull request 
+6. click on Commit
+
+
+7. in old there is not 
+8. Pull request
+9. verify it
+10. Confirm merge
+
+Fork 1 -> one person has fork your request.

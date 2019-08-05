@@ -1,0 +1,14 @@
+revert to previous changes/rollback to previous version
+
+git add revert.txt
+git commit -a -m "msg"
+
+--edit the file
+git commit -a -m "msg"
+
+git log
+-- get the commit hex -> copy first 8 digit
+git checkout 802d82v4 revert.txt
+
+--if two developer change same file and same line then while push they will get conflict
+

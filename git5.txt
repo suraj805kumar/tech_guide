@@ -1,0 +1,37 @@
+- creating repository
+git init - create new repository
+git clone - get existing repository
+
+- create central repository
+after sign in to Git hub -> click Start project -> create a new repository -> enter repository name -> Initialize this repository with a README -> Add gitignore -> Add a license -> click on Create repository
+1. edit file -> commit changes
+
+- create a local repository
+go to folder -> right click select git bash -> git init -- local repository created and initialized
+
+- find link of central repository
+Clone or download
+click and copy the url
+
+
+-- link local repository to remote repository
+git remote add origin "link of central repository"
+-- fetch all file from central repository
+git pull origin master
+
+- making changes in files
+git status -> tell you which files are added to index and are ready to commit
+git add -> lets you add files index
+git commit -> working copy to local repository
+
+1. create a file in working copy
+git status
+git add edu1.txt
+git status
+git commit -m "commit message"
+
+git add -A -> add all file to the index at once
+git commit -a -m "commit message" -> commit all file at once
+
+git log -> detail of all git local repository
+

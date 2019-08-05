@@ -1,0 +1,26 @@
+
+		
+		
+		about project roles and responsibilities
+		AWS/Cloud Foundary
+		12 Factor
+		Messaging Server : Kafka : how it is better than other messaging server in case of high throuput
+		How to deploy war into cloud
+		
+		which cloud service have you used
+		--How to check the application status inside the cloud
+		
+		Fly weight Design Pattern
+		Chain of Responsibility Pattern
+		
+		how to confiure two datasource in Spring boot application
+		Spring cloud
+		Function interface and Lamda expression
+		Collection Stream
+		Jenkins 
+		
+		Docker
+		Python to automate the JUnit
+		
+		
+		

@@ -1,0 +1,31 @@
+https://www.youtube.com/watch?v=WfhRyz3Wf4o
+
+Git : Distributed version control system
+	Git is created by Linus Torvald
+	Git is a Distributed Version Control System.
+	Git is famous for project collaboration
+	More than 1 person can work on project at the same time
+
+centralized version control system - SVN
+Distributed version control system - 
+Local repository (at every local PC) and remote reposistory (at centralized location)
+
+Trunk Based Development: 
+Master Branch:
+create child branch -> after completion -> merge to the Master Branch
+
+Git Hub: Git lab : bitbucket
+on cmd -> git 
+
+1. create an account on github 
+2. login to git hub
+3. create a repository -> Repositories -> New
+4. Owner, name, create reposistory
+
+About tab
+<>code -> code
+5. create a new file
+
+6. edit file mutilple times
+7. go to X Commits to see what has been commited when
+click on View to go to previous version.

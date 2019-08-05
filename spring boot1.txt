@@ -1,0 +1,32 @@
+Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
+Most Spring Boot applications need very little Spring configuration.
+
+Features
+
+    Create stand-alone Spring applications
+
+    Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)
+
+    Provide opinionated 'starter' dependencies to simplify your build configuration
+
+    Automatically configure Spring and 3rd party libraries whenever possible
+
+    Provide production-ready features such as metrics, health checks and externalized configuration
+
+    Absolutely no code generation and no requirement for XML configuration
+
+	
+	create one bootstarp project with Maven: https://start.spring.io/
+	
+	 SpringBoot official documentation:    https://docs.spring.io/spring-boot/docs/2.0.4.RELEASE/reference/htmlsingle/
+
+	 
+	 Spring Boot 2.0.4.RELEASE requires Java 8 or 9 and Spring Framework 5.0.8.RELEASE or above.
+Explicit build support is provided for Maven 3.2+ and Gradle 4.
+
+Spring Boot supports the following embedded servlet containers:
+Name Servlet Version
+Tomcat 8.5 3.1
+Jetty 9.4 3.1
+Undertow 1.4 3.1
+You can also deploy Spring Boot applications to any Servlet 3.1+ compatible container.

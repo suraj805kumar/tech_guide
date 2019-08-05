@@ -1,0 +1,14 @@
+CREATE TABLESPACE abcd DATAFILE 'fdsfdsf.dbf' SIZE 40M     ONLINE; 
+CREATE USER abcd IDENTIFIED BY password DEFAULT TABLESPACE abcd;  
+
+GRANT CREATE SESSION TO abcd WITH ADMIN OPTION; 
+GRANT create session TO abcd;
+GRANT create table TO abcd;
+GRANT create view TO abcd;
+GRANT create any trigger TO abcd;
+GRANT create any procedure TO abcd;
+GRANT create sequence TO abcd;
+GRANT create synonym TO abcd; 
+GRANT UNLIMITED TABLESPACE TO abcd; 
+
+

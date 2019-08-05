@@ -1,0 +1,43 @@
+Parallel development -> Branching
+Local branch
+remote branch
+
+git branch firstbranch -> this will contain all files from master branch to firstbranch
+
+git checkout firstbranch -> switch to child branch
+
+git add -A
+git commit -a -m "msg"
+git checkout master
+
+Merging branch: combine the work of different branch together. should always merge code from child branch to master after development
+
+check out to destination branch
+if firstbranch code has to merge to master
+then goto master branch
+
+git megre firstbranch -> master branch got code of other branch
+
+-modify the existing file and commit it
+git commit -a -m "msg"
+
+-swich to firstbranch
+git rebase firstbranch - merge done linearly without any further commit
+
+- push code from local repository to remote repository
+--under master
+-- first connect through ssh -> generate ssh key
+1. ssh-keygen
+2. cat (ssh key) -> copy it 
+3. go to Git hub account -> settings -> SSH and GPG keys -> New SSH key
+Title: name
+Key: paste the ssh key from 2
+4. go to branch in local 
+ ssh -T git@github.com
+5. refresh the git hub account you can see green
+6. push changes to new branch  
+git checkout firstbranch
+git push origin firstbranch -> it will create a new branch and push all into the new branch in Git hub
+7. push changes to master
+git checkout master
+git push origin master

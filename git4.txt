@@ -1,0 +1,38 @@
+https://www.youtube.com/watch?v=xuB1Id2Wxak&start_radio=1&list=RDxuB1Id2Wxak
+Version Control system
+	- manage the changes of projects
+snapshot of project 
+	- state of the project at one time
+
+push -> local to remote repository
+pull -> remote to local repository
+
+commit -> working copy (from developed code) to local repository
+update -> local repository to working copy
+
+git - version cotrol management tool - to push and pull code from central repository
+
+git hub -> code hosting platform for version control collabration
+
+Git features:
+distributed, compatible, non-linear, branching, lightweight, speed, open source, reliable, secure, economical
+
+git operation and command:
+
+- creating repository
+git init
+
+- making changes
+status
+add
+commit
+
+- syncing repository
+add origin
+push
+pull
+
+- parallel development
+branch
+merge
+rebase

@@ -1,0 +1,21 @@
+=== Branch creation and Merging =====
+1. if edit and commit then by default go to master branch
+Commit changes
+
+Branch creation
+
+
+2. before click on Propose file change, select the option to create new branch
+
+Merge branch
+3. click on Compare & pull Request
+
+compare two branches and merge it.
+4. click on Create Pull request
+5. if conflict then -> click on Resolve conflict
+
+6. Manually edit the file
+7. click on Commit merge
+8. Merge pull Request
+9. Confirm merge
+10 Code -> go to -> master branch verify the code changes.

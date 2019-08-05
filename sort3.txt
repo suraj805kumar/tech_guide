@@ -1,0 +1,553 @@
+	Bubble sort and variants
+
+		Bubble sort, and variants such as the cocktail sort, are simple but highly inefficient sorts. They are thus frequently seen in introductory texts, and are of some theoretical interest due to ease of analysis, but they are rarely used in practice, and primarily of recreational interest. Some variants, such as the Shell sort, have open questions about their behavior.
+			Bubble sort
+						A bubble sort, a sorting algorithm that continuously steps through a list, swapping items until they appear in the correct order.
+	
+
+						Bubble sort is a simple sorting algorithm. The algorithm starts at the beginning of the data set. It compares the first two elements, and if the first is greater than the second, it swaps them. It continues doing this for each pair of adjacent elements to the end of the data set. It then starts again with the first two elements, repeating until no swaps have occurred on the last pass.[30] This algorithm's average time and worst-case performance is O(n2), so it is rarely used to sort large, unordered data sets. Bubble sort can be used to sort a small number of items (where its asymptotic inefficiency is not a high penalty). Bubble sort can also be used efficiently on a list of any length that is nearly sorted (that is, the elements are not significantly out of place). For example, if any number of elements are out of place by only one position (e.g. 0123546789 and 1032547698), bubble sort's exchange will get them in order on the first pass, the second pass will find all elements in order, so the sort will take only 2n time.
+
+			Shellsort
+						A Shell sort, different from bubble sort in that it moves elements to numerous swapping positions.
+
+						Shellsort was invented by Donald Shell in 1959. It improves upon insertion sort by moving out of order elements more than one position at a time. The concept behind Shellsort is that insertion sort performs in O(kn) time, where k is the greatest distance between two out-of-place elements. This means that generally, they perform in O(n2), but for data that is mostly sorted, with only a few elements out of place, they perform faster. So, by first sorting elements far away, and progressively shrinking the gap between the elements to sort, the final sort computes much faster. One implementation can be described as arranging the data sequence in a two-dimensional array and then sorting the columns of the array using insertion sort.
+
+						The worst-case time complexity of Shellsort is an open problem and depends on the gap sequence used, with known complexities ranging from O(n2) to O(n4/3) and Θ(n log2 n). This, combined with the fact that Shellsort is in-place, only needs a relatively small amount of code, and does not require use of the call stack, makes it is useful in situations where memory is at a premium, such as in embedded systems and operating system kernels.[31]
+			
+			Comb sort
+
+						Comb sort is a relatively simple sorting algorithm based on bubble sort and originally designed by Wlodzimierz Dobosiewicz in 1980.[32] It was later rediscovered and popularized by Stephen Lacey and Richard Box with a Byte Magazine article published in April 1991. The basic idea is to eliminate turtles, or small values near the end of the list, since in a bubble sort these slow the sorting down tremendously. (Rabbits, large values around the beginning of the list, do not pose a problem in bubble sort) It accomplishes this by initially swapping elements that are a certain distance from one another in the array, rather than only swapping elements if they are adjacent to one another, and then shrinking the chosen distance until it is operating as a normal bubble sort. Thus, if Shellsort can be thought of as a generalized version of insertion sort that swaps elements spaced a certain distance away from one another, comb sort can be thought of as the same generalization applied to bubble sort.
+	
+	Distribution sort
+
+		Distribution sort refers to any sorting algorithm where data are distributed from their input to multiple intermediate structures which are then gathered and placed on the output. For example, both bucket sort and flashsort are distribution based sorting algorithms. Distribution sorting algorithms can be used on a single processor, or they can be a distributed algorithm, where individual subsets are separately sorted on different processors, then combined. This allows external sorting of data too large to fit into a single computer's memory.
+			
+			Counting sort
+			
+					Counting sort is applicable when each input is known to belong to a particular set, S, of possibilities. The algorithm runs in O(|S| + n) time and O(|S|) memory where n is the length of the input. It works by creating an integer array of size |S| and using the ith bin to count the occurrences of the ith member of S in the input. Each input is then counted by incrementing the value of its corresponding bin. Afterward, the counting array is looped through to arrange all of the inputs in order. This sorting algorithm often cannot be used because S needs to be reasonably small for the algorithm to be efficient, but it is extremely fast and demonstrates great asymptotic behavior as n increases. It also can be modified to provide stable behavior.
+			
+			Bucket sort
+
+					Bucket sort is a divide and conquer sorting algorithm that generalizes counting sort by partitioning an array into a finite number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm.
+
+					A bucket sort works best when the elements of the data set are evenly distributed across all buckets.
+			Radix sort
+				Radix sort is an algorithm that sorts numbers by processing individual digits. n numbers consisting of k digits each are sorted in O(n · k) time. Radix sort can process digits of each number either starting from the least significant digit (LSD) or starting from the most significant digit (MSD). The LSD algorithm first sorts the list by the least significant digit while preserving their relative order using a stable sort. Then it sorts them by the next digit, and so on from the least significant to the most significant, ending up with a sorted list. While the LSD radix sort requires the use of a stable sort, the MSD radix sort algorithm does not (unless stable sorting is desired). In-place MSD radix sort is not stable. It is common for the counting sort algorithm to be used internally by the radix sort. A hybrid sorting approach, such as using insertion sort for small bins improves performance of radix sort significantly. 
+
+				
+				
+				
+================================================================================			
+				
+				
+				
+				
+In Java, we traditionally use for loops or iterators to iterate through the collections. These kind of iterations are called as external iterations and they are clearly visible in the code. Java 8 Stream operations has methods like foreach, map, filter, etc. which internally iterates through the elements. The code is completely unaware of the iteration logic in the background. These kind of iterations are called as internal iterations.
+
+    List<String> names = new ArrayList<>();
+    for (Student student : students) {
+        if(student.getName().startsWith("A")){
+            names.add(student.getName());
+        }
+    }
+
+There is nothing special about this code. This is a traditional Java external iterations example. Now, have a look at the below code. This line is doing exactly the same thing but we can't see any iteration logic here and hence it is called as internal iterations.
+
+    List<string> names = students.stream().map(Student::getName).filter(name->name.startsWith("A"))
+                                    .collect(Collectors.toList());
+
+
+Operations on Streams:
+There are variety of operations defined in the Streams interface. Have a look at the below example. Here we are iterating through list of students, and selecting names of first 10 students whose names start with "A".
+
+    List<String> names = students.stream()
+                                .map(Student::getName)
+                                .filter(name->name.startsWith("A"))
+                                .limit(10)
+                                .collect(Collectors.toList());
+
+
+In the above code there are few operations like map, filter, limit, and collect. We can categories these operations into Intermediate operations and Terminal Operations. 
+
+The intermediate operations return streams and hence can be connected together to form a pipeline of operations. In above example map, filter, and limit are such intermediate operations. 
+
+The terminal operations, as the name suggests reside at the end of such a pipeline and their task is to close the stream in some meaningful way. Terminal operations collect the results of various stream operations in the form of anything like lists, integers or simply nothing. If we have to print the name of students whose name starts with "A", the foreach operation will be our terminal operation that will print all the names from the filtered stream and will return nothing.
+
+
+		
+		https://en.wikipedia.org/wiki/Sorting_algorithm : Comparision algorithms
+		https://en.wikipedia.org/wiki/Sorting_algorithm
+		
+		
+		
+		
+		
+		
+=====================================================================
+		
+		The onreadystatechange Property
+
+The readyState property holds the status of the XMLHttpRequest.
+
+The onreadystatechange property defines a function to be executed when the readyState changes.
+
+The status property and the statusText property holds the status of the XMLHttpRequest object.
+Property 	Description
+onreadystatechange 	Defines a function to be called when the readyState property changes
+readyState 	Holds the status of the XMLHttpRequest.
+0: request not initialized
+1: server connection established
+2: request received
+3: processing request
+4: request finished and response is ready
+status 	200: "OK"
+403: "Forbidden"
+404: "Page not found"
+For a complete list go to the Http Messages Reference
+statusText 	Returns the status-text (e.g. "OK" or "Not Found")
+
+The onreadystatechange function is called every time the readyState changes.
+
+When readyState is 4 and status is 200, the response is ready:
+Example
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML =
+            this.responseText;
+       }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send();
+}
+
+The onreadystatechange event is triggered four times (1-4), one time for each change in the readyState.
+
+=============================================================================================================
+
+Introduction to Collections
+
+A collection — sometimes called a container — is simply an object that groups multiple elements into a single unit. Collections are used to store, retrieve, manipulate, and communicate aggregate data. Typically, they represent data items that form a natural group, such as a poker hand (a collection of cards), a mail folder (a collection of letters), or a telephone directory (a mapping of names to phone numbers). If you have used the Java programming language — or just about any other programming language — you are already familiar with collections.
+What Is a Collections Framework?
+
+A collections framework is a unified architecture for representing and manipulating collections. All collections frameworks contain the following:
+
+    Interfaces: These are abstract data types that represent collections. Interfaces allow collections to be manipulated independently of the details of their representation. In object-oriented languages, interfaces generally form a hierarchy.
+    Implementations: These are the concrete implementations of the collection interfaces. In essence, they are reusable data structures.
+    Algorithms: These are the methods that perform useful computations, such as searching and sorting, on objects that implement collection interfaces. The algorithms are said to be polymorphic: that is, the same method can be used on many different implementations of the appropriate collection interface. In essence, algorithms are reusable functionality.
+
+	
+	Method Detail
+
+    size
+
+    int size()
+
+    Returns the number of elements in this collection. If this collection contains more than Integer.MAX_VALUE elements, returns Integer.MAX_VALUE.
+
+    Returns:
+        the number of elements in this collection
+
+    isEmpty
+
+    boolean isEmpty()
+
+    Returns true if this collection contains no elements.
+
+    Returns:
+        true if this collection contains no elements
+
+    contains
+
+    boolean contains(Object o)
+
+    Returns true if this collection contains the specified element. More formally, returns true if and only if this collection contains at least one element e such that (o==null ? e==null : o.equals(e)).
+
+    Parameters:
+        o - element whose presence in this collection is to be tested
+    Returns:
+        true if this collection contains the specified element
+    Throws:
+        ClassCastException - if the type of the specified element is incompatible with this collection (optional)
+        NullPointerException - if the specified element is null and this collection does not permit null elements (optional)
+
+    iterator
+
+    Iterator<E> iterator()
+
+    Returns an iterator over the elements in this collection. There are no guarantees concerning the order in which the elements are returned (unless this collection is an instance of some class that provides a guarantee).
+
+    Specified by:
+        iterator in interface Iterable<E>
+    Returns:
+        an Iterator over the elements in this collection
+
+    toArray
+
+    Object[] toArray()
+
+    Returns an array containing all of the elements in this collection. If this collection makes any guarantees as to what order its elements are returned by its iterator, this method must return the elements in the same order.
+
+    The returned array will be "safe" in that no references to it are maintained by this collection. (In other words, this method must allocate a new array even if this collection is backed by an array). The caller is thus free to modify the returned array.
+
+    This method acts as bridge between array-based and collection-based APIs.
+
+    Returns:
+        an array containing all of the elements in this collection
+
+    toArray
+
+    <T> T[] toArray(T[] a)
+
+    Returns an array containing all of the elements in this collection; the runtime type of the returned array is that of the specified array. If the collection fits in the specified array, it is returned therein. Otherwise, a new array is allocated with the runtime type of the specified array and the size of this collection.
+
+    If this collection fits in the specified array with room to spare (i.e., the array has more elements than this collection), the element in the array immediately following the end of the collection is set to null. (This is useful in determining the length of this collection only if the caller knows that this collection does not contain any null elements.)
+
+    If this collection makes any guarantees as to what order its elements are returned by its iterator, this method must return the elements in the same order.
+
+    Like the toArray() method, this method acts as bridge between array-based and collection-based APIs. Further, this method allows precise control over the runtime type of the output array, and may, under certain circumstances, be used to save allocation costs.
+
+    Suppose x is a collection known to contain only strings. The following code can be used to dump the collection into a newly allocated array of String:
+
+         String[] y = x.toArray(new String[0]);
+
+    Note that toArray(new Object[0]) is identical in function to toArray().
+
+    Type Parameters:
+        T - the runtime type of the array to contain the collection
+    Parameters:
+        a - the array into which the elements of this collection are to be stored, if it is big enough; otherwise, a new array of the same runtime type is allocated for this purpose.
+    Returns:
+        an array containing all of the elements in this collection
+    Throws:
+        ArrayStoreException - if the runtime type of the specified array is not a supertype of the runtime type of every element in this collection
+        NullPointerException - if the specified array is null
+
+    add
+
+    boolean add(E e)
+
+    Ensures that this collection contains the specified element (optional operation). Returns true if this collection changed as a result of the call. (Returns false if this collection does not permit duplicates and already contains the specified element.)
+
+    Collections that support this operation may place limitations on what elements may be added to this collection. In particular, some collections will refuse to add null elements, and others will impose restrictions on the type of elements that may be added. Collection classes should clearly specify in their documentation any restrictions on what elements may be added.
+
+    If a collection refuses to add a particular element for any reason other than that it already contains the element, it must throw an exception (rather than returning false). This preserves the invariant that a collection always contains the specified element after this call returns.
+
+    Parameters:
+        e - element whose presence in this collection is to be ensured
+    Returns:
+        true if this collection changed as a result of the call
+    Throws:
+        UnsupportedOperationException - if the add operation is not supported by this collection
+        ClassCastException - if the class of the specified element prevents it from being added to this collection
+        NullPointerException - if the specified element is null and this collection does not permit null elements
+        IllegalArgumentException - if some property of the element prevents it from being added to this collection
+        IllegalStateException - if the element cannot be added at this time due to insertion restrictions
+
+    remove
+
+    boolean remove(Object o)
+
+    Removes a single instance of the specified element from this collection, if it is present (optional operation). More formally, removes an element e such that (o==null ? e==null : o.equals(e)), if this collection contains one or more such elements. Returns true if this collection contained the specified element (or equivalently, if this collection changed as a result of the call).
+
+    Parameters:
+        o - element to be removed from this collection, if present
+    Returns:
+        true if an element was removed as a result of this call
+    Throws:
+        ClassCastException - if the type of the specified element is incompatible with this collection (optional)
+        NullPointerException - if the specified element is null and this collection does not permit null elements (optional)
+        UnsupportedOperationException - if the remove operation is not supported by this collection
+
+    containsAll
+
+    boolean containsAll(Collection<?> c)
+
+    Returns true if this collection contains all of the elements in the specified collection.
+
+    Parameters:
+        c - collection to be checked for containment in this collection
+    Returns:
+        true if this collection contains all of the elements in the specified collection
+    Throws:
+        ClassCastException - if the types of one or more elements in the specified collection are incompatible with this collection (optional)
+        NullPointerException - if the specified collection contains one or more null elements and this collection does not permit null elements (optional), or if the specified collection is null.
+    See Also:
+        contains(Object)
+
+    addAll
+
+    boolean addAll(Collection<? extends E> c)
+
+    Adds all of the elements in the specified collection to this collection (optional operation). The behavior of this operation is undefined if the specified collection is modified while the operation is in progress. (This implies that the behavior of this call is undefined if the specified collection is this collection, and this collection is nonempty.)
+
+    Parameters:
+        c - collection containing elements to be added to this collection
+    Returns:
+        true if this collection changed as a result of the call
+    Throws:
+        UnsupportedOperationException - if the addAll operation is not supported by this collection
+        ClassCastException - if the class of an element of the specified collection prevents it from being added to this collection
+        NullPointerException - if the specified collection contains a null element and this collection does not permit null elements, or if the specified collection is null
+        IllegalArgumentException - if some property of an element of the specified collection prevents it from being added to this collection
+        IllegalStateException - if not all the elements can be added at this time due to insertion restrictions
+    See Also:
+        add(Object)
+
+    removeAll
+
+    boolean removeAll(Collection<?> c)
+
+    Removes all of this collection's elements that are also contained in the specified collection (optional operation). After this call returns, this collection will contain no elements in common with the specified collection.
+
+    Parameters:
+        c - collection containing elements to be removed from this collection
+    Returns:
+        true if this collection changed as a result of the call
+    Throws:
+        UnsupportedOperationException - if the removeAll method is not supported by this collection
+        ClassCastException - if the types of one or more elements in this collection are incompatible with the specified collection (optional)
+        NullPointerException - if this collection contains one or more null elements and the specified collection does not support null elements (optional), or if the specified collection is null
+    See Also:
+        remove(Object), contains(Object)
+
+    removeIf
+
+    default boolean removeIf(Predicate<? super E> filter)
+
+    Removes all of the elements of this collection that satisfy the given predicate. Errors or runtime exceptions thrown during iteration or by the predicate are relayed to the caller.
+
+    Implementation Requirements:
+        The default implementation traverses all elements of the collection using its iterator(). Each matching element is removed using Iterator.remove(). If the collection's iterator does not support removal then an UnsupportedOperationException will be thrown on the first matching element.
+    Parameters:
+        filter - a predicate which returns true for elements to be removed
+    Returns:
+        true if any elements were removed
+    Throws:
+        NullPointerException - if the specified filter is null
+        UnsupportedOperationException - if elements cannot be removed from this collection. Implementations may throw this exception if a matching element cannot be removed or if, in general, removal is not supported.
+    Since:
+        1.8
+
+    retainAll
+
+    boolean retainAll(Collection<?> c)
+
+    Retains only the elements in this collection that are contained in the specified collection (optional operation). In other words, removes from this collection all of its elements that are not contained in the specified collection.
+
+    Parameters:
+        c - collection containing elements to be retained in this collection
+    Returns:
+        true if this collection changed as a result of the call
+    Throws:
+        UnsupportedOperationException - if the retainAll operation is not supported by this collection
+        ClassCastException - if the types of one or more elements in this collection are incompatible with the specified collection (optional)
+        NullPointerException - if this collection contains one or more null elements and the specified collection does not permit null elements (optional), or if the specified collection is null
+    See Also:
+        remove(Object), contains(Object)
+
+    clear
+
+    void clear()
+
+    Removes all of the elements from this collection (optional operation). The collection will be empty after this method returns.
+
+    Throws:
+        UnsupportedOperationException - if the clear operation is not supported by this collection
+
+    equals
+
+    boolean equals(Object o)
+
+    Compares the specified object with this collection for equality.
+
+    While the Collection interface adds no stipulations to the general contract for the Object.equals, programmers who implement the Collection interface "directly" (in other words, create a class that is a Collection but is not a Set or a List) must exercise care if they choose to override the Object.equals. It is not necessary to do so, and the simplest course of action is to rely on Object's implementation, but the implementor may wish to implement a "value comparison" in place of the default "reference comparison." (The List and Set interfaces mandate such value comparisons.)
+
+    The general contract for the Object.equals method states that equals must be symmetric (in other words, a.equals(b) if and only if b.equals(a)). The contracts for List.equals and Set.equals state that lists are only equal to other lists, and sets to other sets. Thus, a custom equals method for a collection class that implements neither the List nor Set interface must return false when this collection is compared to any list or set. (By the same logic, it is not possible to write a class that correctly implements both the Set and List interfaces.)
+
+    Overrides:
+        equals in class Object
+    Parameters:
+        o - object to be compared for equality with this collection
+    Returns:
+        true if the specified object is equal to this collection
+    See Also:
+        Object.equals(Object), Set.equals(Object), List.equals(Object)
+
+    hashCode
+
+    int hashCode()
+
+    Returns the hash code value for this collection. While the Collection interface adds no stipulations to the general contract for the Object.hashCode method, programmers should take note that any class that overrides the Object.equals method must also override the Object.hashCode method in order to satisfy the general contract for the Object.hashCode method. In particular, c1.equals(c2) implies that c1.hashCode()==c2.hashCode().
+
+    Overrides:
+        hashCode in class Object
+    Returns:
+        the hash code value for this collection
+    See Also:
+        Object.hashCode(), Object.equals(Object)
+
+    spliterator
+
+    default Spliterator<E> spliterator()
+
+    Creates a Spliterator over the elements in this collection. Implementations should document characteristic values reported by the spliterator. Such characteristic values are not required to be reported if the spliterator reports Spliterator.SIZED and this collection contains no elements.
+
+    The default implementation should be overridden by subclasses that can return a more efficient spliterator. In order to preserve expected laziness behavior for the stream() and parallelStream()} methods, spliterators should either have the characteristic of IMMUTABLE or CONCURRENT, or be late-binding. If none of these is practical, the overriding class should describe the spliterator's documented policy of binding and structural interference, and should override the stream() and parallelStream() methods to create streams using a Supplier of the spliterator, as in:
+
+
+         Stream<E> s = StreamSupport.stream(() -> spliterator(), spliteratorCharacteristics)
+     
+
+    These requirements ensure that streams produced by the stream() and parallelStream() methods will reflect the contents of the collection as of initiation of the terminal stream operation.
+
+    Specified by:
+        spliterator in interface Iterable<E>
+    Implementation Requirements:
+        The default implementation creates a late-binding spliterator from the collections's Iterator. The spliterator inherits the fail-fast properties of the collection's iterator.
+
+        The created Spliterator reports Spliterator.SIZED.
+    Implementation Note:
+        The created Spliterator additionally reports Spliterator.SUBSIZED.
+
+        If a spliterator covers no elements then the reporting of additional characteristic values, beyond that of SIZED and SUBSIZED, does not aid clients to control, specialize or simplify computation. However, this does enable shared use of an immutable and empty spliterator instance (see Spliterators.emptySpliterator()) for empty collections, and enables clients to determine if such a spliterator covers no elements.
+    Returns:
+        a Spliterator over the elements in this collection
+    Since:
+        1.8
+
+    stream
+
+    default Stream<E> stream()
+
+    Returns a sequential Stream with this collection as its source.
+
+    This method should be overridden when the spliterator() method cannot return a spliterator that is IMMUTABLE, CONCURRENT, or late-binding. (See spliterator() for details.)
+
+    Implementation Requirements:
+        The default implementation creates a sequential Stream from the collection's Spliterator.
+    Returns:
+        a sequential Stream over the elements in this collection
+    Since:
+        1.8
+
+    parallelStream
+
+    default Stream<E> parallelStream()
+
+    Returns a possibly parallel Stream with this collection as its source. It is allowable for this method to return a sequential stream.
+
+    This method should be overridden when the spliterator() method cannot return a spliterator that is IMMUTABLE, CONCURRENT, or late-binding. (See spliterator() for details.)
+
+    Implementation Requirements:
+        The default implementation creates a parallel Stream from the collection's Spliterator.
+    Returns:
+        a possibly parallel Stream over the elements in this collection
+    Since:
+        1.8
+
+
+		
+		
+		 The Collection interface contains methods that perform basic operations, such as int size(), boolean isEmpty(), boolean contains(Object element), boolean add(E element), boolean remove(Object element), and Iterator<E> iterator().
+
+It also contains methods that operate on entire collections, such as boolean containsAll(Collection<?> c), boolean addAll(Collection<? extends E> c), boolean removeAll(Collection<?> c), boolean retainAll(Collection<?> c), and void clear().
+
+Additional methods for array operations (such as Object[] toArray() and <T> T[] toArray(T[] a) exist as well.
+
+In JDK 8 and later, the Collection interface also exposes methods Stream<E> stream() and Stream<E> parallelStream(), for obtaining sequential or parallel streams from the underlying collection. (See the lesson entitled Aggregate Operations for more information about using streams.) 
+
+Traversing Collections
+
+There are three ways to traverse collections: (1) using aggregate operations (2) with the for-each construct and (3) by using Iterators. 
+
+
+Aggregate Operations
+
+In JDK 8 and later, the preferred method of iterating over a collection is to obtain a stream and perform aggregate operations on it. Aggregate operations are often used in conjunction with lambda expressions to make programming more expressive, using less lines of code. The following code sequentially iterates through a collection of shapes and prints out the red objects:
+
+myShapesCollection.stream()
+.filter(e -> e.getColor() == Color.RED)
+.forEach(e -> System.out.println(e.getName()));
+
+Likewise, you could easily request a parallel stream, which might make sense if the collection is large enough and your computer has enough cores:
+
+myShapesCollection.parallelStream()
+.filter(e -> e.getColor() == Color.RED)
+.forEach(e -> System.out.println(e.getName()));
+
+There are many different ways to collect data with this API. For example, you might want to convert the elements of a Collection to String objects, then join them, separated by commas:
+
+    String joined = elements.stream()
+    .map(Object::toString)
+    .collect(Collectors.joining(", "));
+
+Or perhaps sum the salaries of all employees:
+
+int total = employees.stream()
+.collect(Collectors.summingInt(Employee::getSalary)));
+
+
+
+
+A List is an ordered Collection (sometimes called a sequence). Lists may contain duplicate elements. In addition to the operations inherited from Collection, the List interface includes operations for the following:
+
+    Positional access — manipulates elements based on their numerical position in the list. This includes methods such as get, set, add, addAll, and remove.
+    Search — searches for a specified object in the list and returns its numerical position. Search methods include indexOf and lastIndexOf.
+    Iteration — extends Iterator semantics to take advantage of the list's sequential nature. The listIterator methods provide this behavior.
+    Range-view — The sublist method performs arbitrary range operations on the list.
+
+The Java platform contains two general-purpose List implementations. ArrayList, which is usually the better-performing implementation, and LinkedList which offers better performance under certain circumstances. 
+
+ add and addAll operations always append the new element(s) to the end of the list. Thus, the following idiom concatenates one list to another.
+
+list1.addAll(list2);
+
+a nondestructive form of this idiom, which produces a third List consisting of the second list appended to the first.
+
+an example (JDK 8 and later) that aggregates some names into a List:
+
+List<String> list = people.stream()
+.map(Person::getName)
+.collect(Collectors.toList());
+
+
+
+
+=============================================================
+
+╔══════════════╦═══════════════════════════════╦════════════════════════════════╗
+║    METHOD    ║            TRANSIENT          ║            DETACHED            ║
+╠══════════════╬═══════════════════════════════╬════════════════════════════════╣
+║              ║       sets id if doesn't      ║   sets new id even if object   ║
+║    save()    ║     exist, persists to db,    ║    already has it, persists    ║
+║              ║    returns attached object    ║ to DB, returns attached object ║
+╠══════════════╬═══════════════════════════════╬════════════════════════════════╣
+║              ║       sets id on object       ║             throws             ║
+║   persist()  ║     persists object to DB     ║       PersistenceException     ║
+║              ║                               ║                                ║
+╠══════════════╬═══════════════════════════════╬════════════════════════════════╣
+║              ║                               ║                                ║
+║   update()   ║           Exception           ║     persists and reattaches    ║
+║              ║                               ║                                ║
+╠══════════════╬═══════════════════════════════╬════════════════════════════════╣
+║              ║  copy the state of object in  ║    copy the state of obj in    ║
+║    merge()   ║     DB, doesn't attach it,    ║      DB, doesn't attach it,    ║
+║              ║    returns attached object    ║     returns attached object    ║
+╠══════════════╬═══════════════════════════════╬════════════════════════════════╣
+║              ║                               ║                                ║
+║saveOrUpdate()║           as save()           ║            as update()         ║
+║              ║                               ║                                ║
+╚══════════════╩═══════════════════════════════╩════════════════════════════════╝
+
+
+-=================================================
+
+https://alligator.io/js/json-parse-stringify/
+https://www.digitalocean.com/community/tutorials/how-to-work-with-json-in-javascript
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+
+https://www.w3schools.com/howto/howto_css_shapes.asp
+https://www.w3schools.com/howto/howto_css_image_overlay_slide.asp
+https://www.w3schools.com/howto/howto_js_accordion.asp
