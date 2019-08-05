@@ -22,6 +22,8 @@ Hi username! You've successfully authenticated, but Github does
 not provide shell access.
 
 ===========================
+https://help.github.com/en/articles/adding-a-file-to-a-repository-using-the-command-line
+
 Adding a file to a repository using the command line
 
 On your computer, move the file you'd like to upload to GitHub into the local directory that was created when you cloned the repository.
@@ -46,6 +48,9 @@ $ git push origin your-branch
 
 
 =============================================
+
+https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line
+
 
 Adding an existing project to GitHub using the command line
 
