@@ -30,7 +30,7 @@
 
                                 <mysql.connector.version>5.0.5</mysql.connector.version>
 
-                                <junit.version>4.11</junit.version>
+                                <junit.version>4.13.1</junit.version>
 
                                 <spring.ws.core.version>2.2.0.RELEASE</spring.ws.core.version>
 
